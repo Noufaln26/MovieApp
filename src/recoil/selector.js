@@ -1,9 +1,9 @@
 import { selector } from "recoil";
 const { movieDataState } = require("./atom");
 
-export const updateMovieData = selector({
+export const updatedMovieDetails = selector({
   key: "updateMovieData",
-  get: ({ get }) => movieDataState,
+  get: ({}) => {},
   set: ({ set, get }, apiResponse) => {
     if (!apiResponse || !apiResponse.page) {
       console.error("Invalid API response:", apiResponse);
@@ -39,9 +39,4 @@ export const incrementPageSelector = selector({
       currentPage: prevState.currentPage + 1,
     }));
   },
-});
-
-export const movieListSelector = selector({
-  key: "listOfMovies",
-  get: ({}) => movieDataState.movieList,
 });

@@ -5,7 +5,7 @@ const NavBar = ({ searchQuery, setSearchQuery }) => {
   const [searchToggle, setSearchToggle] = useState(false);
   return (
     <nav
-      className={`sticky top-0 py-1 bg-transparent h-auto ${'bg-[url("/images/nav_bar.png")]'}`}
+      className={`sticky top-0 py-1 h-auto bg-transparent bg-cover ${'bg-[url("/images/nav_bar.png")]'}`}
     >
       <div className="flex flex-row item-center justify-between m-2">
         <div className="flex items-center">
@@ -20,15 +20,6 @@ const NavBar = ({ searchQuery, setSearchQuery }) => {
         </div>
 
         <div className="flex justify-end items-center ">
-          {searchToggle && (
-            <input
-              autoFocus
-              className="w-full mx-2 bg-black text-white border border-white rounded"
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          )}
           <div
             className="flex justify-end items-center"
             onClick={() => setSearchToggle(!searchToggle)}
@@ -42,6 +33,17 @@ const NavBar = ({ searchQuery, setSearchQuery }) => {
             />
           </div>
         </div>
+      </div>
+      <div className="m-1">
+        {searchToggle && (
+          <input
+            autoFocus
+            className="w-full p-2 bg-black text-white border border-white rounded"
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        )}
       </div>
     </nav>
   );

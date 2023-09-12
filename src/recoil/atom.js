@@ -1,12 +1,12 @@
-import { atom } from 'recoil';
+import { atom } from "recoil";
 
 export const movieDataState = atom({
-  key: 'movieDataState',
+  key: "movieDataState",
   default: {
     movieList: [],
     totalCount: 0,
-    fetching: false,
+    fetchingCompleted: false,
     currentPage: 1,
     pagesReturned: 0,
-  }
+  },
 });
