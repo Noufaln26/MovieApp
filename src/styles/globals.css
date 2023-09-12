@@ -4,11 +4,27 @@
 
 :root {
   --background-color: #171717; /* background color */
-  --text-color: #FFFFFF; /* text color */
+  --text-color: #ffffff; /* text color */
 }
 
 body {
   color: var(--text-color);
+  text-align: center;
   background-color: var(--background-color);
-  height: 100vh;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer 10+ */
+
+}
+
+/* Hide scrollbar on mobile devices */
+@media (max-width: 640px) { 
+  body {
+      scrollbar-width: none; 
+      -ms-overflow-style: none; 
+  }
+
+  ::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+  }
 }

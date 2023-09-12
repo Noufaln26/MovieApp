@@ -8,5 +8,6 @@ export const movieDataState = atom({
     fetchingCompleted: false,
     currentPage: 1,
     pagesReturned: 0,
+    isLoading: false,
   },
 });

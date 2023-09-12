@@ -1,22 +1,35 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
-const NavBar = ({ searchQuery, setSearchQuery }) => {
+const NavBar = ({ searchQuery, setSearchQuery, title }) => {
+  const capitalizeWords = (str) =>
+    str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+
   const [searchToggle, setSearchToggle] = useState(false);
   return (
     <nav
-      className={`sticky top-0 py-1 h-auto bg-transparent bg-cover ${'bg-[url("/images/nav_bar.png")]'}`}
+      className={`sticky top-0 py-1 bg-transparent bg-center bg-cover bg-no-repeat ${'bg-[url("/images/nav_bar.png")]'}`}
     >
       <div className="flex flex-row item-center justify-between m-2">
         <div className="flex items-center">
-          <Image
-            className="mr-2 h-auto"
-            src="/images/Back.png"
-            alt="Back"
-            width={24}
-            height={24}
-          />
-          <div className="text-white">Romance Comedy</div>
+          <Link href="/">
+            <Image
+              className="mr-2 h-auto bg-cover"
+              src="/images/Back.png"
+              alt="Back"
+              width={24}
+              height={24}
+            />
+          </Link>
+          {title && (
+            <div className="text-white">
+              {capitalizeWords(title) || "Romance Comedy"}
+            </div>
+          )}
         </div>
 
         <div className="flex justify-end items-center ">
@@ -25,7 +38,7 @@ const NavBar = ({ searchQuery, setSearchQuery }) => {
             onClick={() => setSearchToggle(!searchToggle)}
           >
             <Image
-              className="mx-2 h-auto"
+              className="mx-2 h-auto bg-cover"
               src="/images/search.png"
               alt="Search"
               width={20}
@@ -49,4 +62,4 @@ const NavBar = ({ searchQuery, setSearchQuery }) => {
   );
 };
 
-export default NavBar;
+export default memo(NavBar);

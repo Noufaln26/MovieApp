@@ -1,4 +1,4 @@
-const MovieCard = ({ movie, index }) => {
+const MovieCard = ({ movie }) => {
   const breakWord = (word) => {
     if (word.length <= 11) return word;
     return `${word.slice(0, 9)}...`;
@@ -9,7 +9,7 @@ const MovieCard = ({ movie, index }) => {
       <img
         onError={(e) => {
           e.target.onerror = null;
-          e.target.src = "./images/placeholder_for_missing_posters.png";
+          e.target.src = "/images/placeholder_for_missing_posters.png";
         }}
         src={`/images/${movie["poster-image"]}`}
         alt={`${movie.name} poster`}

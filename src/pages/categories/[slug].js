@@ -1,13 +1,16 @@
 import { useEffect, useState, useCallback } from "react";
 import MovieList from "@/components/MovieList";
 import NavBar from "@/components/NavBar";
-import { updatedMovieDetails } from "@/recoil/selector";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { movieDataState } from "@/recoil/atom";
 import useFuzzySearch from "@/hooks/useFuzzySearch";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll";
+import { useRouter } from "next/router";
+import Head from "next/head";
 
 const Categories = () => {
+  const router = useRouter();
+
   const [searchQuery, setSearchQuery] = useState("");
   const [globalState, setGlobalState] = useRecoilState(movieDataState);
 
@@ -17,6 +20,7 @@ const Categories = () => {
     currentPage,
     pagesReturned,
     fetchingCompleted,
+    isLoading,
   } = globalState;
 
   const fetchData = async () => {
@@ -30,6 +34,7 @@ const Categories = () => {
         }));
         return;
       }
+
       const apiResponse = await response.json();
       setGlobalState((prevState) => ({
         ...prevState,
@@ -67,8 +72,15 @@ const Categories = () => {
   useInfiniteScroll(getNextPage);
 
   return (
-    <main>
-      <NavBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+    <main className="bg-black ">
+      <Head>
+        <title>Movie App</title>
+      </Head>
+      <NavBar
+        title={router.query.slug}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
       <MovieList filterMovies={filterAppliedMovies} />
     </main>
   );
